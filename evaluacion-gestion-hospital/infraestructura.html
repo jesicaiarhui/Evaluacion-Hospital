@@ -1,366 +1,91 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Formulario de Evaluación - Infraestructura</title>
-
+  
   <!-- Google Fonts: Poppins -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="./css/estilos.css" />
-
-  <style>
-    /* Estilos para pantallas pequeñas */
-    @media (max-width: 768px) {
-      /* Contenedor que envuelve la barra lateral y el contenido principal */
-      .contenedor {
-        flex-direction: column; /* Cambia la disposición a columna */
-      }
-
-      /* Estilos para la barra lateral en pantallas pequeñas */
-      .barra-lateral {
-        width: 100%; /* Ocupa todo el ancho de la pantalla */
-        height: auto; /* Se ajusta al contenido */
-        position: fixed; /* Fija la barra lateral al inicio */
-        top: 0;
-        left: 0;
-        z-index: 10; /* Asegura que la barra esté sobre otros elementos */
-        text-align: center;
-        padding: 10px 0; /* Espaciado interno */
-      }
-
-      /* Lista de enlaces en la barra lateral */
-      .barra-lateral ul {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap; /* Permite que los elementos se ajusten */
-        gap: 15px;
-      }
-
-      /* Estilos para el contenido principal en pantallas pequeñas */
-      .contenido-principal {
-        margin-top: 150px; /* Espacio para la barra lateral */
-        flex-direction: column; /* Cambia la disposición a columna */
-        padding: 10px;
-      }
-
-      /* Estilo para el contenedor del formulario */
-      .formulario-contenedor {
-        padding: 20px;
-        box-shadow: none; /* Elimina la sombra en pantallas pequeñas */
-      }
-
-      /* Estilo para el botón de volver */
-      .btn-volver {
-        margin-bottom: 20px;
-        align-self: flex-start;
-      }
-
-      /* Estilo para los elementos del menú en la barra lateral */
-      .barra-lateral .menu-item {
-        display: block;
-        color: white;
-        text-decoration: none;
-        margin: 10px 0;
-        font-weight: bold;
-      }
-    }
-
-    /* Estilos para pantallas grandes */
-    @media (min-width: 769px) {
-      /* Barra lateral para pantallas grandes */
-      .barra-lateral {
-        width: 200px; /* Mantiene el tamaño original de la barra lateral */
-        height: 100vh; /* Ocupa toda la altura de la pantalla */
-        position: relative; /* Establece la barra en su posición original */
-      }
-    }
-
-    /* Estilos generales para el cuerpo */
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f5f5f5;
-      margin: 0;
-      padding: 0;
-    }
-
-    /* Contenedor principal (barra lateral y contenido) */
-    .contenedor {
-      display: flex;
-    }
-
-    /* Barra lateral */
-    .barra-lateral {
-      width: 200px;
-      background-color: #338c36;
-      color: white;
-      padding: 20px;
-      height: 100vh;
-    }
-
-    /* Logo en la barra lateral */
-    .barra-lateral .logo {
-      width: 100%;
-      margin-bottom: 20px;
-    }
-
-    /* Estilo de la lista de elementos en la barra lateral */
-    .barra-lateral ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    /* Estilo para los enlaces del menú */
-    .barra-lateral .menu-item {
-      display: block;
-      color: white;
-      text-decoration: none;
-      margin: 10px 0;
-      font-weight: bold;
-    }
-
-    /* Contenido principal */
-    .contenido-principal {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      padding: 20px;
-      gap: 20px;
-      width: 100%;
-    }
-
-    /* Estilo para el botón "Volver" */
-    .btn-volver {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background-color: #a2c617;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      font-family: 'Poppins', sans-serif;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      height: fit-content;
-    }
-
-    .btn-volver svg {
-      width: 20px;
-      height: 20px;
-      fill: white;
-    }
-
-    .btn-volver:hover {
-      background-color: #a2c617;
-      transform: translateX(-4px);
-    }
-
-    /* Estilo para el formulario */
-    .formulario-contenedor {
-      background: #ffffff;
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      max-width: 600px;
-      width: 100%;
-    }
-
-    .formulario-contenedor h1 {
-      text-align: center;
-      color: #ffffff;
-      margin-bottom: 30px;
-      font-weight: 700;
-      background-color: #a2c617;
-      padding: 15px;
-      border-radius: 12px;
-      border: 2px solid #a2c617;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Estilo para las etiquetas en el formulario */
-    form label {
-      display: block;
-      margin-top: 20px;
-      margin-bottom: 6px;
-      font-weight: 700;
-      color: #333;
-    }
-
-    /* Estilo para los mensajes pequeños debajo de las etiquetas */
-    form small {
-      display: block;
-      margin-bottom: 6px;
-      color: #666;
-      font-weight: 400;
-      font-size: 14px;
-    }
-
-    /* Estilo para los campos de entrada en el formulario */
-    form input,
-    form textarea,
-    form select {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 400;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    /* Estilo específico para el área de texto */
-    form textarea {
-      height: 100px;
-      resize: vertical;
-    }
-
-    /* Estilo para los botones de radio */
-    .radio-group {
-      display: flex;
-      gap: 20px;
-      margin-top: 5px;
-    }
-
-    .radio-group label {
-      font-weight: 400;
-    }
-
-    /* Estilo para el botón de envío del formulario */
-    .btn-enviar {
-      margin-top: 30px;
-      background-color: #a2c617;
-      color: white;
-      padding: 14px;
-      border: none;
-      border-radius: 8px;
-      width: 100%;
-      font-size: 18px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .btn-enviar:hover {
-      background-color: #8aa816;
-    }
-
-    /* Estilo para el modal de éxito */
-    #modal-exito {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 9999;
-      justify-content: center;
-      align-items: center;
-    }
-
-    /* Contenido del modal */
-    .modal-contenido {
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      text-align: center;
-      max-width: 400px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-      font-family: 'Poppins', sans-serif;
-    }
-
-    /* Estilo para el botón de cerrar del modal */
-    .cerrar {
-      color: #aaa;
-      font-size: 28px;
-      font-weight: bold;
-      position: absolute;
-      top: 10px;
-      right: 25px;
-    }
-
-    .cerrar:hover,
-    .cerrar:focus {
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"> <!-- Asegúrate de tener el archivo styles.css -->
 </head>
-
 <body>
+
   <div class="contenedor">
 
     <!-- Barra lateral -->
-    <nav class="barra-lateral">
-      <img src="./img/logoHospital.jpg" alt="Logo del Hospital" class="logo" />
+    <div class="barra-lateral">
+      <button class="toggle-btn" id="toggle-btn">☰</button>
+      <img src="logo_hospital.png" alt="Logo del hospital" class="logo">
       <ul>
-        <li><a href="index.html" class="menu-item">Inicio</a></li>
-        <li><a href="#" class="menu-item" onclick="salir()">Salir</a></li>
+        <li><a href="evaluaciones_infraestructura.html">Infraestructura</a></li>
+        <li><a href="evaluaciones_recursos_humanos.html">Recursos Humanos</a></li>
+        <li><a href="evaluaciones_tecnologia.html">Tecnología</a></li>
+        <li><a href="evaluaciones_medicamentos.html">Medicamentos</a></li>
+        <li><a href="evaluaciones_insumos.html">Insumos</a></li>
       </ul>
-    </nav>
+      <button class="boton-salir">Salir</button>
+    </div>
 
     <!-- Contenido principal -->
     <div class="contenido-principal">
-
-      <!-- Botón Volver al Inicio -->
-      <div>
-        <a href="index.html" class="btn-volver">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24">
-            <path d="M10.828 12l4.95-4.95a1 1 0 1 0-1.414-1.414l-6.364 6.364a1 1 0 0 0 0 1.414l6.364 6.364a1 1 0 0 0 1.414-1.414L10.828 12z"/>
-          </svg>
-        </a>
-      </div>
-
-      <!-- Formulario -->
       <div class="formulario-contenedor">
-        <h1>INFRAESTRUCTURA</h1>
+        <h1>Evaluación de Infraestructura</h1>
 
-        <form id="infraestructura">
-          <label for="sector">1. Sector / Área de la infraestructura:</label>
-          <small>Ejemplo: Sala de espera, Consultorios, Baños, Farmacia, etc.</small>
-          <input type="text" id="sector" required />
+        <form id="formulario-infraestructura">
+          <label for="sector_infraestructura">1. Sector / Área de la infraestructura:</label>
+          <input type="text" id="sector_infraestructura" name="sector_infraestructura" placeholder="Ejemplo: Sala de espera, Consultorios..." required />
 
-          <label for="estado">2. ¿En qué estado considera que se encuentra esta área?</label>
-          <small>(Del 1 al 100, donde 1 es muy deficiente y 100 es excelente)</small>
-          <input type="number" id="estado" min="1" max="100" required />
+          <label for="estado_infraestructura">2. Estado de la infraestructura:</label>
+          <select id="estado_infraestructura" name="estado_infraestructura" required>
+            <option value="bueno">Bueno</option>
+            <option value="regular">Regular</option>
+            <option value="malo">Malo</option>
+          </select>
 
-          <label>3. ¿Se solucionó el problema que presentaba esta área?</label>
+          <label>3. ¿Está el mantenimiento actualizado?</label>
           <div class="radio-group">
-            <label><input type="radio" name="solucionado" value="Sí" required /> Sí</label>
-            <label><input type="radio" name="solucionado" value="No" /> No</label>
+            <label><input type="radio" name="mantenimiento" value="si" required /> Sí</label>
+            <label><input type="radio" name="mantenimiento" value="no" required /> No</label>
           </div>
 
-          <label for="tiempo">4. En caso de haberse solucionado, ¿cuál cree que fue el tiempo promedio de solución?</label>
-          <small>(Puede estimarlo en días, semanas o meses)</small>
-          <input type="text" id="tiempo" />
+          <label for="observaciones">4. Observaciones adicionales:</label>
+          <textarea id="observaciones" name="observaciones" placeholder="Escribe tus observaciones aquí..." required></textarea>
 
-          <label for="observaciones">5. Observaciones adicionales:</label>
-          <small>📝 Comentarios, sugerencias o detalles del problema</small>
-          <textarea id="observaciones"></textarea>
-
-          <button type="submit" class="btn-enviar">Enviar</button>
+          <button type="submit" class="btn-enviar">Enviar evaluación</button>
         </form>
-      </div>
 
+        <a href="index.html" class="btn-volver">← Volver al inicio</a>
+      </div>
     </div>
   </div>
 
-  <!-- JavaScript -->
-  <script type="module" src="./supabase.js"></script>
-  <script type="module" src="./js/infraestructura.js"></script>
+  <!-- Modal de éxito -->
+  <div id="modal-exito">
+    <div class="modal-contenido">
+      <span class="cerrar" id="cerrar-modal">&times;</span>
+      <h2>¡Evaluación enviada exitosamente!</h2>
+      <p>Gracias por completar el formulario. Tu evaluación ha sido registrada.</p>
+    </div>
+  </div>
 
   <script>
-    function salir() {
-      if (confirm("¿Desea salir del sistema?")) {
-        alert("Muchas gracias.");
-        window.location.href = "index.html";
-      }
-    }
+    // Mostrar el modal de éxito al enviar el formulario
+    document.getElementById('formulario-infraestructura').addEventListener('submit', function(event) {
+      event.preventDefault();
+      document.getElementById('modal-exito').style.display = 'flex';
+    });
+
+    // Cerrar el modal
+    document.getElementById('cerrar-modal').addEventListener('click', function() {
+      document.getElementById('modal-exito').style.display = 'none';
+    });
+
+    // Funcionalidad para colapsar la barra lateral
+    document.getElementById('toggle-btn').addEventListener('click', function() {
+      document.querySelector('.barra-lateral').classList.toggle('colapsada');
+    });
   </script>
+
 </body>
 </html>
