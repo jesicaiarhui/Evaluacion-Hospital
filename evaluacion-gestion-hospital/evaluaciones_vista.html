@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Evaluaciones del Hospital</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h1>Evaluaciones del Hospital</h1>
+
+  <div id="resultados"></div>
+
+  <canvas id="grafico" width="400" height="200"></canvas>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script>
+    const supabaseUrl = 'https://TU_PROYECTO.supabase.co';
+    const supabaseKey = 'TU_ANON_KEY';
+    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+    // Función para obtener los resultados de las evaluaciones
+    async function obtenerEvaluaciones() {
+      const { data, error } = await supabase
+        .from('evaluaciones')
+        .select('*');
+
+      if (error) {
+        console.error('Error al obtener las evaluaciones:', error.message);
+        return;
+      }
+
+      // Mostrar las evaluaciones
+      mostrarEvaluaciones(data);
+
+      // Crear gráfico de barras
+      crearGrafico(data);
+    }
+
+    // Función para mostrar las evaluaciones en la página
+    function mostrarEvaluaciones(evaluaciones) {
+      const resultadosDiv = document.getElementById('resultados');
+      resultadosDiv.innerHTML = ''; // Limpiar resultados previos
+
+      evaluaciones.forEach((eval) => {
+        const contenedor = document.createElement('div');
+        contenedor.style.marginBottom = '20px';
+
+        const semaforoColor = obtenerColorSemaforo(eval.semaforo);
+        contenedor.innerHTML = `
+          <h3>${eval.area} - ${eval.sector}</h3>
+          <p>Porcentaje: ${eval.porcentaje}%</p>
+          <p>Semáforo: <span style="color: ${semaforoColor}">${eval.semaforo.toUpperCase()}</span></p>
+          <p>Observaciones: ${eval.observaciones || 'Ninguna'}</p>
+        `;
+
+        resultadosDiv.appendChild(contenedor);
+      });
+    }
+
+    // Función para obtener el color del semáforo según el valor
+    function obtenerColorSemaforo(semaforo) {
+      switch (semaforo) {
+        case 'rojo':
+          return 'red';
+        case 'amarillo':
+          return 'yellow';
+        case 'verde':
+          return 'green';
+        default:
+          return 'gray';
+      }
+    }
+
+    // Función para crear el gráfico
+    function crearGrafico(evaluaciones) {
+      const porcentajes = evaluaciones.map(eval => eval.porcentaje);
+      const areas = evaluaciones.map(eval => eval.area);
+
+      const ctx = document.getElementById('grafico').getContext('2d');
+      const grafico = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: areas,
+          datasets: [{
+            label: 'Porcentaje de Evaluación',
+            data: porcentajes,
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    }
+
+    // Obtener las evaluaciones al cargar la página
+    obtenerEvaluaciones();
+  </script>
+</body>
+</html>

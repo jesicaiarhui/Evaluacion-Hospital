@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Evaluación de Gestión - Hospital Nuestra Señora de Nieva</title>
+
+  <!-- Fuente Poppins desde Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Estilos CSS externos -->
+  <link rel="stylesheet" href="./css/estilos.css">
+</head>
+<body>
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <div class="contenedor">
+
+    <!-- BARRA LATERAL -->
+    <nav class="barra-lateral" id="sidebar">
+      <!-- Botón de colapso de barra lateral -->
+      <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+
+      <!-- Logo del Hospital -->
+      <img src="./img/logoHospital.jpg" alt="Logo del Hospital" class="logo">
+
+      <!-- Menú de navegación -->
+      <ul>
+        <li><a href="index.html" class="menu-item">Inicio</a></li>
+        <li><a href="#" class="menu-item" id="salirBtn">Salir</a></li>
+      </ul>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="contenido">
+
+      <!-- ENCABEZADO -->
+      <header class="encabezado">
+        <h1>BIENVENIDOS/AS AL SISTEMA DE EVALUACIÓN DE GESTIÓN DEL HOSPITAL NUESTRA SEÑORA DE NIEVA</h1>
+        <p class="subtitulo">
+          Este sistema permite evaluar mensualmente las condiciones de infraestructura, recursos tecnológicos,
+          medicamentos, insumos y recursos humanos del hospital.
+        </p>
+      </header>
+
+      <!-- BOTONES DE ACCESO POR ÁREA -->
+      <div class="botones">
+        <a href="infraestructura.html" class="btn btn-infraestructura">Infraestructura</a>
+        <a href="tecnologia.html" class="btn btn-tecnologia">Recursos Tecnológicos</a>
+        <a href="insumos.html" class="btn btn-insumos">Medicamentos e Insumos</a>
+        <a href="rrhh.html" class="btn btn-rrhh">Recursos Humanos</a>
+        <a href="direccion.html" class="btn btn-direccion">Vista Dirección</a>
+      </div>
+
+      <!-- CARRUSEL DE IMÁGENES -->
+      <div class="carrusel">
+        <div class="slides">
+          <img src="./img/foto1.jpg" alt="Imagen Hospital 1">
+          <img src="./img/logoHospital.jpg" alt="Imagen Hospital 2">
+          <img src="./img/foto2.jpg" alt="Imagen Hospital 3">
+        </div>
+      </div>
+
+    </div> <!-- Fin contenido -->
+  </div> <!-- Fin contenedor -->
+
+  <!-- MODAL DE SALIDA -->
+  <div id="miModal" class="modal">
+    <div class="modal-contenido">
+      <span class="cerrar" id="cerrarModal">&times;</span>
+      <h2>Muchas gracias por su colaboración</h2>
+      <p>¡Esperamos verte pronto!</p>
+      <button onclick="window.location.href='index.html'">Salir</button>
+    </div>
+  </div>
+
+  <!-- SCRIPT DE FUNCIONALIDAD -->
+  <script>
+    // Función para colapsar la barra lateral
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('colapsada');
+    }
+
+    // Abrir modal al hacer clic en "Salir"
+    document.getElementById('salirBtn').addEventListener('click', function (e) {
+      e.preventDefault();
+      document.getElementById('miModal').style.display = "block";
+    });
+
+    // Cerrar modal al hacer clic en la X
+    document.getElementById('cerrarModal').addEventListener('click', function () {
+      document.getElementById('miModal').style.display = "none";
+    });
+
+    // Cerrar modal al hacer clic fuera de él
+    window.onclick = function (event) {
+      if (event.target == document.getElementById('miModal')) {
+        document.getElementById('miModal').style.display = "none";
+      }
+    };
+  </script>
+
+</body>
+</html>
