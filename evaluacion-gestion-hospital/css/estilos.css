@@ -398,3 +398,35 @@ button:hover {
   }
 }
 
+/* --------- FORMULARIOS Y VISTA PRINCIPAL ADAPTADA --------- */
+.contenido-principal {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 30px;
+  gap: 20px;
+  overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  .contenido-principal {
+    flex-direction: column;
+    margin-top: 220px; /* espacio si la barra lateral está arriba */
+    padding: 15px;
+  }
+
+  .barra-lateral {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  .barra-lateral.colapsada .logo {
+    width: 40px;
+  }
+
+  .barra-lateral.colapsada ul li a {
+    font-size: 0;
+    padding: 10px 0;
+  }
+}
