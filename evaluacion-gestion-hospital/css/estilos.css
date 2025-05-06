@@ -5,17 +5,16 @@ body {
   background-color: #f9f9f9;
 }
 
-
 .contenedor {
   display: flex;
   height: 100vh;
+  flex-direction: row;
 }
-
 
 /* --------- BARRA LATERAL IZQUIERDA --------- */
 .barra-lateral {
   width: 220px;
-  background-color: #338c36; /* Verde claro */
+  background-color: #338c36;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
@@ -73,7 +72,6 @@ body {
   background-color: #6e9618;
 }
 
-
 /* --------- BOTÓN DE COLAPSO DE LA BARRA LATERAL --------- */
 .toggle-btn {
   background: none;
@@ -100,14 +98,12 @@ body {
   padding: 12px 0;
 }
 
-
 /* --------- CONTENIDO PRINCIPAL --------- */
 .contenido {
   flex: 1;
   padding: 30px;
   overflow-y: auto;
 }
-
 
 /* --------- ENCABEZADO --------- */
 .encabezado h1 {
@@ -124,7 +120,6 @@ body {
   max-width: 800px;
   margin: 0 auto 40px auto;
 }
-
 
 /* --------- BOTONES DE ÁREAS --------- */
 .botones {
@@ -145,55 +140,29 @@ body {
   transition: background-color 0.3s ease, transform 0.2s ease;
   min-width: 200px;
   font-family: 'Poppins', sans-serif;
-  
-
 }
 
-/* Botón: Infraestructura */
-.btn-infraestructura {
-  background-color: #a2c617;
-}
-.btn-infraestructura:hover {
-  background-color: #8cab14;
-}
+.btn-infraestructura { background-color: #a2c617; }
+.btn-infraestructura:hover { background-color: #8cab14; }
 
-/* Botón: Recursos Tecnológicos */
-.btn-tecnologia {
-  background-color: #eabd27;
-}
-.btn-tecnologia:hover {
-  background-color: #eabd27;
-}
+.btn-tecnologia { background-color: #eabd27; }
+.btn-tecnologia:hover { background-color: #d4a417; }
 
-/* Botón: Medicamentos e Insumos */
-.btn-insumos {
-  background-color: #e67e22;
-}
-.btn-insumos:hover {
-  background-color: #cf6b0e;
-}
+.btn-insumos { background-color: #e67e22; }
+.btn-insumos:hover { background-color: #cf6b0e; }
 
-/* Botón: Recursos Humanos */
-.btn-rrhh {
-  background-color: #9b59b6;
-}
-.btn-rrhh:hover {
-  background-color: #7e3e97;
-}
+.btn-rrhh { background-color: #9b59b6; }
+.btn-rrhh:hover { background-color: #7e3e97; }
 
-/* Botón: Dirección */
-.btn-direccion {
-  background-color: #3e7c58;
-}
-.btn-direccion:hover {
-  background-color: #2a5038;
-}
+.btn-direccion { background-color: #3e7c58; }
+.btn-direccion:hover { background-color: #2a5038; }
+
 .btn-volver {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   margin-bottom: 20px;
-  margin-left: auto; /* Esto lo empuja hacia la derecha */
+  margin-left: auto;
   background-color: #2c3e50;
   color: white;
   padding: 10px 20px;
@@ -215,9 +184,7 @@ body {
   transform: translateX(-4px);
 }
 
-
-
-/* --------- CARRUSEL DE IMÁGENES --------- */
+/* --------- CARRUSEL --------- */
 .carrusel {
   width: 100%;
   max-width: 1000px;
@@ -252,8 +219,7 @@ body {
   100% { transform: translateX(0); }
 }
 
-
-/* --------- MODAL (VENTANA EMERGENTE) --------- */
+/* --------- MODAL --------- */
 .modal {
   display: none;
   position: fixed;
@@ -292,8 +258,7 @@ body {
   cursor: pointer;
 }
 
-
-/* --------- BOTONES MODALES --------- */
+/* --------- BOTONES --------- */
 button {
   padding: 10px 20px;
   background-color: #478e65;
@@ -309,9 +274,127 @@ button:hover {
   background-color: #3b7d55;
 }
 
-/* Efecto al hacer clic en botones */
 .btn:active {
   transform: scale(1.1);
 }
 
+/* --------- RESPONSIVE DESIGN --------- */
+@media (max-width: 600px) {
+  .contenedor {
+    flex-direction: column;
+  }
+
+  .barra-lateral {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px;
+  }
+
+  .barra-lateral ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .barra-lateral ul li {
+    margin: 10px 0;
+  }
+
+  .barra-lateral.colapsada {
+    width: 100%;
+  }
+
+  .contenido {
+    padding: 15px;
+  }
+
+  .botones {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn {
+    min-width: 90%;
+    font-size: 16px;
+  }
+
+  .carrusel {
+    height: 200px;
+  }
+
+  .modal-contenido {
+    width: 90%;
+  }
+
+  .encabezado h1 {
+    font-size: 24px;
+  }
+
+  .encabezado .subtitulo {
+    font-size: 14px;
+  }
+}
+
+/* --------- RESPONSIVE DESIGN --------- */
+@media (max-width: 768px) {
+  .contenedor {
+    flex-direction: column;
+  }
+
+  .barra-lateral {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  .barra-lateral ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .barra-lateral ul li {
+    margin: 0;
+  }
+
+  .barra-lateral.colapsada {
+    width: 100%;
+  }
+
+  .contenido {
+    padding: 20px;
+  }
+
+  .encabezado h1 {
+    font-size: 22px;
+  }
+
+  .encabezado .subtitulo {
+    font-size: 14px;
+  }
+
+  .botones {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .carrusel {
+    height: 200px;
+  }
+
+  .modal-contenido {
+    width: 80%;
+  }
+}
 
