@@ -1,40 +1,39 @@
-import { supabase } from '../supabase.js';  // Asegúrate de que la ruta a supabase.js sea correcta
+import { supabase } from '../supabase.js'; // Asegúrate de que la ruta sea correcta
 
-// Cuando se envíe el formulario
 document.getElementById('infraestructura').addEventListener('submit', async (event) => {
-    event.preventDefault(); // Evita que el formulario se recargue
+    event.preventDefault();
 
     // Captura los valores del formulario
     const sector = document.getElementById('sector').value;
-    const porcentaje = parseFloat(document.getElementById('porcentaje').value);
-    const problemas = document.getElementById('problemas').value;
+    const estado = parseFloat(document.getElementById('estado').value); // antes "porcentaje"
+    const problema_encontrado = document.querySelector('input[name="problema_encontrado"]:checked')?.value || '';
+    const reportado_a = document.getElementById('reportado_a').value;
+    const solucionado = document.querySelector('input[name="solucionado"]:checked')?.value || '';
     const tiempo = document.getElementById('tiempo').value;
     const observaciones = document.getElementById('observaciones').value;
 
-    // Cálculo automático del semáforo
-    let semaforo = 'verde'; // Valor por defecto
-
-    if (porcentaje < 50) {
-        semaforo = 'rojo'; // Si el porcentaje es menor al 50%, semáforo rojo
-    } else if (porcentaje >= 50 && porcentaje <= 75) {
-        semaforo = 'amarillo'; // Si el porcentaje está entre 50 y 75%, semáforo amarillo
-    } else {
-        semaforo = 'verde'; // Si el porcentaje es mayor al 75%, semáforo verde
+    // Cálculo del semáforo según el estado
+    let semaforo = 'verde';
+    if (estado < 50) {
+        semaforo = 'rojo';
+    } else if (estado <= 75) {
+        semaforo = 'amarillo';
     }
 
     try {
-        // Enviar los datos a Supabase
         const { data, error } = await supabase
             .from('evaluaciones')
             .insert([
                 {
-                    area: 'Infraestructura',  // Area se define como 'Infraestructura'
+                    area: 'Infraestructura',
                     sector,
-                    porcentaje,
-                    semaforo,  // Usamos el semáforo calculado
+                    porcentaje: estado, // se sigue guardando como porcentaje en Supabase
+                    semaforo,
                     observaciones,
-                    problemas,
+                    problemas: problema_encontrado,
                     tiempo_promedio_solucion: tiempo,
+                    notificado_a: reportado_a,
+                    solucionado
                 }
             ]);
 
@@ -42,12 +41,8 @@ document.getElementById('infraestructura').addEventListener('submit', async (eve
             console.error('Error al guardar la evaluación:', error);
             alert('Error al guardar la evaluación');
         } else {
-            // Mostrar ventana modal con el mensaje de éxito
             mostrarModal();
-
-            // Limpiar los campos del formulario
             document.getElementById('infraestructura').reset();
-
             console.log('Evaluación guardada:', data);
         }
     } catch (err) {
@@ -56,16 +51,19 @@ document.getElementById('infraestructura').addEventListener('submit', async (eve
     }
 });
 
-// Función para mostrar el modal de éxito
 function mostrarModal() {
     const modal = document.getElementById('modal-exito');
-    modal.style.display = 'flex';
-    setTimeout(() => {
-        modal.style.display = 'none';
-    }, 5000); // Ocultar automáticamente a los 5 segundos
+    if (modal) {
+        modal.style.display = 'flex';
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 5000);
+    }
 }
 
-// Función para cerrar el modal manualmente
 function cerrarModal() {
-    document.getElementById('modal-exito').style.display = 'none';
+    const modal = document.getElementById('modal-exito');
+    if (modal) {
+        modal.style.display = 'none';
+    }
 }
