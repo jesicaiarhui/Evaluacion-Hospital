@@ -141,6 +141,39 @@
     .btn-enviar:hover {
       background-color: #a2c617;
     }
+    /* Modal de éxito */
+    #modal-exito {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    #modal-exito .contenido {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      max-width: 400px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    #modal-exito h2 {
+      color: #338c36;
+      font-weight: 700;
+    }
+    #modal-exito button {
+      margin-top: 20px;
+      background-color: #a2c617;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -169,7 +202,7 @@
         <h1>INFRAESTRUCTURA</h1>
 
         <form id="infraestructura">
-          <label for="sector">1. Sector / Área de la infraestructura:</label>
+          <label for="sector">1. Sector / Área:</label>
           <small>Ejemplo: Sala de espera, Consultorios, Baños, Farmacia, etc.</small>
           <input type="text" id="sector" required />
 
@@ -182,6 +215,10 @@
             <label><input type="radio" name="problema_encontrado" value="Sí" required /> Sí</label>
             <label><input type="radio" name="problema_encontrado" value="No" /> No</label>
           </div>
+
+          <label for="detalle_problema">3.1 Describa y detalle cuál es el problema/defecto del área</label>
+          <small>🛠️ Sea lo más específico posible (ej.: filtración de techo, enchufe suelto, pintura descascarada, etc.)</small>
+          <textarea id="detalle_problema" required></textarea>
 
           <label for="reportado_a">4. ¿A quién le reportó el problema?</label>
           <small>Indique el nombre del responsable, sector o área a la que se notificó.</small>
@@ -207,6 +244,14 @@
     </div>
   </div>
 
+  <!-- Modal de éxito -->
+  <div id="modal-exito">
+    <div class="contenido">
+      <h2>✅ Evaluación guardada con éxito</h2>
+      <button onclick="cerrarModal()">Cerrar</button>
+    </div>
+  </div>
+
   <!-- Scripts -->
   <script type="module" src="./supabase.js"></script>
   <script type="module" src="./js/infraestructura.js"></script>
@@ -217,6 +262,10 @@
         alert("Muchas gracias.");
         window.location.href = "index.html";
       }
+    }
+
+    function cerrarModal() {
+      document.getElementById('modal-exito').style.display = 'none';
     }
   </script>
 </body>
