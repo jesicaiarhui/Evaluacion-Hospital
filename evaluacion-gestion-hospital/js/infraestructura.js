@@ -5,8 +5,9 @@ document.getElementById('infraestructura').addEventListener('submit', async (eve
 
     // Captura los valores del formulario
     const sector = document.getElementById('sector').value;
-    const estado = parseFloat(document.getElementById('estado').value); // antes "porcentaje"
+    const estado = parseFloat(document.getElementById('estado').value);
     const problema_encontrado = document.querySelector('input[name="problema_encontrado"]:checked')?.value || '';
+    const detalle_problema = document.getElementById('detalle_problema').value;
     const reportado_a = document.getElementById('reportado_a').value;
     const solucionado = document.querySelector('input[name="solucionado"]:checked')?.value || '';
     const tiempo = document.getElementById('tiempo').value;
@@ -27,10 +28,11 @@ document.getElementById('infraestructura').addEventListener('submit', async (eve
                 {
                     area: 'Infraestructura',
                     sector,
-                    porcentaje: estado, // se sigue guardando como porcentaje en Supabase
+                    porcentaje: estado,
                     semaforo,
                     observaciones,
                     problemas: problema_encontrado,
+                    detalle_problema, // nuevo campo agregado
                     tiempo_promedio_solucion: tiempo,
                     notificado_a: reportado_a,
                     solucionado
