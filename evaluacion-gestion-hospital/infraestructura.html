@@ -49,7 +49,7 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      background-color: #a2c617  ;
+      background-color: #a2c617;
       color: white;
       padding: 10px 20px;
       border-radius: 8px;
@@ -65,7 +65,7 @@
       fill: white;
     }
     .btn-volver:hover {
-      background-color: #a2c617  ;
+      background-color: #a2c617;
       transform: translateX(-4px);
     }
     .formulario-contenedor {
@@ -81,10 +81,10 @@
       color: #ffffff;
       margin-bottom: 30px;
       font-weight: 700;
-      background-color: #a2c617 ;
+      background-color: #a2c617;
       padding: 15px;
       border-radius: 12px;
-      border: 2px solid #a2c617  ;
+      border: 2px solid #a2c617;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
     form label {
@@ -127,7 +127,7 @@
     }
     .btn-enviar {
       margin-top: 30px;
-      background-color: #a2c617  ;
+      background-color: #a2c617;
       color: white;
       padding: 14px;
       border: none;
@@ -139,7 +139,7 @@
       transition: background-color 0.3s ease;
     }
     .btn-enviar:hover {
-      background-color: #a2c617 ;
+      background-color: #a2c617;
     }
   </style>
 </head>
@@ -177,17 +177,27 @@
           <small>(Del 1 al 100, donde 1 es muy deficiente y 100 es excelente)</small>
           <input type="number" id="estado" min="1" max="100" required />
 
-          <label>3. ¿Se solucionó el problema que presentaba esta área?</label>
+          <label>3. ¿Se encontró algún problema/defecto en su área?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="problema_encontrado" value="Sí" required /> Sí</label>
+            <label><input type="radio" name="problema_encontrado" value="No" /> No</label>
+          </div>
+
+          <label for="reportado_a">4. ¿A quién le reportó el problema?</label>
+          <small>Indique el nombre del responsable, sector o área a la que se notificó.</small>
+          <input type="text" id="reportado_a" />
+
+          <label>5. ¿Se solucionó el problema que presentaba esta área?</label>
           <div class="radio-group">
             <label><input type="radio" name="solucionado" value="Sí" required /> Sí</label>
             <label><input type="radio" name="solucionado" value="No" /> No</label>
           </div>
 
-          <label for="tiempo">4. En caso de haberse solucionado, ¿cuál fue el tiempo promedio de solución?</label>
+          <label for="tiempo">6. En caso de haberse solucionado, ¿cuál fue el tiempo promedio de solución?</label>
           <small>(Puede estimarlo en días, semanas o meses)</small>
           <input type="text" id="tiempo" />
 
-          <label for="observaciones">5. Observaciones adicionales:</label>
+          <label for="observaciones">7. Observaciones adicionales:</label>
           <small>📝 Comentarios, sugerencias o detalles del problema</small>
           <textarea id="observaciones"></textarea>
 
